@@ -1,16 +1,16 @@
 <#
   .SYNOPSIS
   DeployTemplate
-  
+
   .DESCRIPTION
   DeployTemplate
-  
+
   .INPUTS
   DeployTemplate - The name of DeployTemplate
 
   .OUTPUTS
   None
-  
+
   .EXAMPLE
   DeployTemplate
 
@@ -24,14 +24,22 @@ function DeployTemplate() {
     param
     (
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $resourceGroup
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]
         $DeploymentName
         ,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]
         $TemplateFile
         ,
         [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
         [string]
         $TemplateParameterFile
     )
@@ -43,7 +51,7 @@ function DeployTemplate() {
 
     # Create or update the resource group using the specified template file and template parameters file
     New-AzureRmResourceGroupDeployment -Name "$DeploymentName" `
-        -ResourceGroupName "fabrickubernetes2" `
+        -ResourceGroupName $resourceGroup `
         -TemplateFile $TemplateFile `
         -TemplateParameterFile $TemplateParameterFile `
         -Force -Verbose
