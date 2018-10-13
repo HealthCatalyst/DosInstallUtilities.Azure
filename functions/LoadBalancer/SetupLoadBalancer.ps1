@@ -155,7 +155,6 @@ function SetupLoadBalancer() {
         -ssl $ssl `
         -ingressInternalType "$ingressInternalType" `
         -ingressExternalType "$ingressExternalType" `
-        -customerid $customerid `
         -externalSubnet "$externalSubnetName" `
         -externalIp "$externalip" `
         -internalSubnet "$internalSubnetName" `

@@ -19,7 +19,7 @@
         "networkSecurityGroupName": {
             "type": "string",
             "maxLength": 24
-        },        
+        },
         "tenantId": {
             "type": "string",
             "metadata": {
@@ -99,10 +99,6 @@
             "metadata": {
                 "description": "Value of the secret to store in the vault"
             }
-        },
-        "subscriptionID": {
-            "type": "string",
-            "defaultValue": ""
         }
     },
     "variables": {
@@ -149,7 +145,7 @@
                             "keys": "[parameters('keysPermissions')]",
                             "secrets": "[parameters('secretsPermissions')]"
                         }
-                    }                    
+                    }
                 ],
                 "sku": {
                     "name": "[parameters('vaultSku')]",
@@ -177,6 +173,18 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "securityRules": []
+            }
+        },
+        {
+            "apiVersion": "2015-06-15",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "IngressPublicIP",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "displayName": "IngressPublicIP"
+            },
+            "properties": {
+                "publicIPAllocationMethod": "Static"
             }
         }
     ],

@@ -29,6 +29,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\arm\GetKeyVaultSecretValue.ps1
 . $PSScriptRoot\functions\arm\StripJsonComments.ps1
 . $PSScriptRoot\functions\arm\DownloadCredentialsForAks.ps1
+. $PSScriptRoot\functions\arm\LaunchAksDashboard.ps1
 
 # Subscription
 . $PSScriptRoot\functions\Subscription\SetCurrentAzureSubscription.ps1
