@@ -14,6 +14,8 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 #     . $_.FullName
 # }
 
+. $PSScriptRoot\functions\Globals.ps1
+
 . $PSScriptRoot\functions\LoginToAzure.ps1
 
 . $PSScriptRoot\functions\Uninstall-AllModules.ps1

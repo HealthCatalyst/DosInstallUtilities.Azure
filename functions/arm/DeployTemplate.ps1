@@ -46,8 +46,12 @@ function DeployTemplate() {
 
     Write-Verbose 'DeployTemplate: Starting'
 
+    Write-Host "Deploying AKS takes about 10-20 minutes"
+
     # get tenantId via Get-AzureRmSubscription
     # get objectId via $(Get-AzureRmADUser -UserPrincipalName '{imran.qureshi@healthcatalyst.com}').Id
+
+    # https://vincentlauzon.com/2018/08/28/deploying-aks-with-arm-template-network-integration/
 
     # Create or update the resource group using the specified template file and template parameters file
     New-AzureRmResourceGroupDeployment -Name "$DeploymentName" `

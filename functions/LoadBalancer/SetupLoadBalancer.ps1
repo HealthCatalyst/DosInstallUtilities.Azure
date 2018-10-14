@@ -148,6 +148,8 @@ function SetupLoadBalancer() {
         $internalIp = $($config.ingress.internal.ipAddress);
     }
 
+    InitHelm
+
     [bool] $ssl = $($($config.ssl) -eq "true")
     $packageUrl = "https://raw.githubusercontent.com/HealthCatalyst/helm.loadbalancer/master/fabricloadbalancer-1.0.0.tgz"
     InstallLoadBalancerHelmPackage `
@@ -191,6 +193,9 @@ function SetupLoadBalancer() {
         Write-Host "To access the urls from your browser, add the following entries in your c:\windows\system32\drivers\etc\hosts file"
         Write-Host "$externalIp $dnsrecordname"
     }
+
+    # install nginx
+    helm install stable/nginx-ingress --namespace kube-system
 
     Write-Verbose 'SetupLoadBalancer: Done'
 }

@@ -38,7 +38,13 @@ function LaunchAksDashboard()
 
     Write-Verbose 'LaunchAksDashboard: Starting'
 
-    Start-AzureRmAksDashboard -ResourceGroupName $resourceGroup -Name "Kluster-$resourceGroup"
+    $clusterName = "Kluster-$resourceGroup"
+    # az aks install-cli
+    # az aks get-credentials --resource-group $resourceGroup --name "$clusterName"
+    # az aks browse --resource-group $resourceGroup --name "$clusterName"
+    # $env:path += 'C:\Users\imran.qureshi\.azure-kubectl'
+
+    Start-AzureRmAksDashboard -ResourceGroupName $resourceGroup -Name "$clusterName"
 
     Write-Verbose 'LaunchAksDashboard: Done'
 

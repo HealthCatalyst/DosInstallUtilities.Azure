@@ -13,6 +13,9 @@ Describe "$filename Integration Tests" -Tags @('Integration','Cluster') {
         $templateFile = "$here\..\..\..\clientenvironments\fabrickubernetes2\cluster.parameters.json"
         $templateFile | Should Exist
 
-        CleanResourceGroup -DeploymentName "CleanCluster" -TemplateFile "$here\..\..\arm\cluster.json" -TemplateParameterFile "$templateFile" -Verbose
+        $globals.resourceGroup | Should Not BeNullOrEmpty
+        $globals.resourceGroup | Should BeOfType [string]
+
+        CleanResourceGroup -resourceGroup "$($globals.resourceGroup)" -DeploymentName "CleanCluster" -TemplateFile "$here\..\..\arm\cluster.json" -TemplateParameterFile "$templateFile" -Verbose
     }
 }

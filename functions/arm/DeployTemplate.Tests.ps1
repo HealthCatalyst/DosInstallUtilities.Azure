@@ -11,14 +11,27 @@ Describe "$filename Unit Tests" -Tags 'Unit' {
 Describe "$filename Cluster Integration Tests" -Tags @('Integration','Cluster') {
     It "Deploys cluster Template" {
         Set-AzureRmContext -SubscriptionId "c8b1589f-9270-46ee-967a-417817e7d10d" -Verbose
-        DeployTemplate -ResourceGroup "fabrickubernetes2" -DeploymentName "CreateCluster" -TemplateFile ..\arm\cluster.json -TemplateParameterFile ..\..\clientenvironments\fabrickubernetes2\cluster.parameters.json -Verbose
+        $templateFile = "$here\..\..\..\clientenvironments\fabrickubernetes2\cluster.parameters.json"
+        $templateFile | Should Exist
+
+        $templateFile = "$here\..\..\..\clientenvironments\fabrickubernetes2\aks.parameters.json"
+        $templateFile | Should Exist
+
+        $globals.resourceGroup | Should Not BeNullOrEmpty
+        $globals.resourceGroup | Should BeOfType [string]
+
+        DeployTemplate -ResourceGroup "$($globals.resourceGroup)" -DeploymentName "CreateCluster" -TemplateFile "$here\..\..\arm\cluster.json" -TemplateParameterFile "$templateFile" -Verbose
     }
 }
 
 Describe "$filename ACS Integration Tests" -Tags @('Integration','ACS') {
     It "Deploys cluster Template" {
         Set-AzureRmContext -SubscriptionId "c8b1589f-9270-46ee-967a-417817e7d10d" -Verbose
-        DeployTemplate -ResourceGroup "fabrickubernetes2" -DeploymentName "DeployACS" -TemplateFile ..\arm\acs.json -TemplateParameterFile ..\..\clientenvironments\fabrickubernetes2\acs.parameters.json -Verbose
+
+        $globals.resourceGroup | Should Not BeNullOrEmpty
+        $globals.resourceGroup | Should BeOfType [string]
+
+        DeployTemplate -ResourceGroup "$($globals.resourceGroup)" -DeploymentName "DeployACS" -TemplateFile ..\arm\acs.json -TemplateParameterFile ..\..\clientenvironments\fabrickubernetes2\acs.parameters.json -Verbose
     }
 }
 
@@ -29,6 +42,9 @@ Describe "$filename AKS Integration Tests" -Tags @('Integration','AKS') {
         $templateFile = "$here\..\..\..\clientenvironments\fabrickubernetes2\aks.parameters.json"
         $templateFile | Should Exist
 
-        DeployTemplate -ResourceGroup "fabrickubernetes2" -DeploymentName "DeployAKS" -TemplateFile "$here\..\..\arm\aks.json" -TemplateParameterFile "$templateFile" -Verbose
+        $globals.resourceGroup | Should Not BeNullOrEmpty
+        $globals.resourceGroup | Should BeOfType [string]
+
+        DeployTemplate -ResourceGroup "$($globals.resourceGroup)" -DeploymentName "DeployAKS" -TemplateFile "$here\..\..\arm\aks.json" -TemplateParameterFile "$templateFile" -Verbose
     }
 }

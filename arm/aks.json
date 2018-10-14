@@ -83,7 +83,13 @@
         "metadata": {
           "description": "dnsServiceIP"
         }
-      }      
+      },
+      "enableRBAC": {
+        "type": "bool",
+        "metadata": {
+          "description": "Whether to enable Kubernetes Role-Based Access Control."
+        }
+      }
     },
     "variables": {
       "agentsEndpointDNSNamePrefix":"[concat(parameters('dnsNamePrefix'),'agents')]",
@@ -105,6 +111,7 @@
           "orchestratorProfile": {
             "orchestratorType": "Kubernetes"
           },
+          "enableRBAC": "[parameters('enableRBAC')]",
           "masterProfile": {
             "count": "[parameters('masterCount')]",
             "vmSize": "[parameters('agentVMSize')]",
@@ -125,7 +132,7 @@
             "serviceCidr": "[parameters('serviceCidr')]",
             "dnsServiceIP": "[parameters('dnsServiceIP')]",
             "dockerBridgeCidr": "172.17.0.1/16"
-          },          
+          },
           "linuxProfile": {
             "adminUsername": "[parameters('adminUsername')]",
             "ssh": {

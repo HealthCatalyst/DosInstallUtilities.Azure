@@ -20,6 +20,8 @@ Get-Module "$module" | Remove-Module -Force
 
 Import-Module "$here\..\$module\$module.psm1" -Force
 
+echo $globals | Out-String
+
 # Invoke-Pester "$here\Module.Tests.ps1"
 
 # Storage
@@ -46,15 +48,19 @@ Import-Module "$here\..\$module\$module.psm1" -Force
 
 # Invoke-Pester "$here\functions\arm\AssignPermissionsToServicePrincipal.Tests.ps1" -Tag 'Integration' -Verbose
 
-Invoke-Pester "$here\functions\arm\CleanResourceGroup.Tests.ps1" -Tag 'Cluster' -Verbose
+# Invoke-Pester "$here\functions\arm\CleanResourceGroup.Tests.ps1" -Tag 'Cluster' -Verbose
 
 # Invoke-Pester "$here\functions\arm\DeployTemplate.Tests.ps1" -Tag 'Unit' -Verbose
 # Invoke-Pester "$here\functions\arm\DeployTemplate.Tests.ps1" -Tag 'Cluster' -Verbose
 # Invoke-Pester "$here\functions\arm\DeployTemplate.Tests.ps1" -Tag 'ACS' -Verbose
 
+# Invoke-Pester "$here\functions\arm\DeployTemplate.Tests.ps1" -Tag 'Cluster' -Verbose
+
 Invoke-Pester "$here\functions\arm\DeployTemplate.Tests.ps1" -Tag 'AKS' -Verbose
 
-Invoke-Pester "$here\functions\arm\DownloadCredentialsForAks.Tests.ps1" -Tag 'Integration' -Verbose
+# Invoke-Pester "$here\functions\arm\DownloadCredentialsForAks.Tests.ps1" -Tag 'Integration' -Verbose
+
+# Invoke-Pester "$here\functions\arm\LaunchAksDashboard.Tests.ps1" -Tag 'Integration' -Verbose
 
 # Set-AzureRmContext -SubscriptionId "c8b1589f-9270-46ee-967a-417817e7d10d" -Verbose
 # Get-AzureRmAks

@@ -1,16 +1,16 @@
 <#
   .SYNOPSIS
   CleanResourceGroup
-  
+
   .DESCRIPTION
   CleanResourceGroup
-  
+
   .INPUTS
   CleanResourceGroup - The name of CleanResourceGroup
 
   .OUTPUTS
   None
-  
+
   .EXAMPLE
   CleanResourceGroup
 
@@ -24,6 +24,11 @@ function CleanResourceGroup()
     [CmdletBinding()]
     param
     (
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $resourceGroup
+        ,
         [Parameter(Mandatory = $true)]
         [string]
         $DeploymentName
@@ -39,12 +44,14 @@ function CleanResourceGroup()
 
     Write-Verbose 'CleanResourceGroup: Starting'
 
+    Write-Host "Info: Cleaning a resoure group typically takes less than a minute"
+
     # get tenantId via Get-AzureRmSubscription
     # get objectId via $(Get-AzureRmADUser -UserPrincipalName '{imran.qureshi@healthcatalyst.com}').Id
 
     # Create or update the resource group using the specified template file and template parameters file
     New-AzureRmResourceGroupDeployment -Name "$DeploymentName" `
-        -ResourceGroupName "fabrickubernetes2" `
+        -ResourceGroupName $resourceGroup `
         -TemplateFile $TemplateFile `
         -TemplateParameterFile $TemplateParameterFile `
         -Mode Complete `
