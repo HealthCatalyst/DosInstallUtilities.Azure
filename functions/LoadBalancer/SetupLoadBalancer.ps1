@@ -151,7 +151,7 @@ function SetupLoadBalancer() {
     InitHelm
 
     [bool] $ssl = $($($config.ssl) -eq "true")
-    $packageUrl = "https://raw.githubusercontent.com/HealthCatalyst/helm.loadbalancer/master/fabricloadbalancer-1.0.0.tgz"
+    $packageUrl = $globals.loadbalancerPackageUrl
     InstallLoadBalancerHelmPackage `
         -packageUrl $packageUrl `
         -ssl $ssl `

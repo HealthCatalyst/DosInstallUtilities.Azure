@@ -41,6 +41,8 @@ function LaunchAksDashboard()
     $clusterName = "Kluster-$resourceGroup"
     # az aks install-cli
     # az aks get-credentials --resource-group $resourceGroup --name "$clusterName"
+    # give permissions to dashboard
+    # kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
     # az aks browse --resource-group $resourceGroup --name "$clusterName"
     # $env:path += 'C:\Users\imran.qureshi\.azure-kubectl'
 
