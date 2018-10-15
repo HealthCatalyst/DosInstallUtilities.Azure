@@ -17,15 +17,14 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\Globals.ps1
 
 . $PSScriptRoot\functions\LoginToAzure.ps1
+. $PSScriptRoot\functions\InitKubernetes.ps1
 
 . $PSScriptRoot\functions\Uninstall-AllModules.ps1
 
 # arm
 . $PSScriptRoot\functions\arm\AssignPermissionsToServicePrincipal.ps1
 . $PSScriptRoot\functions\arm\BuildSubnetId.ps1
-. $PSScriptRoot\functions\arm\CreateServicePrincipal.ps1
 . $PSScriptRoot\functions\arm\CleanResourceGroup.ps1
-. $PSScriptRoot\functions\arm\DeployTemplate.ps1
 . $PSScriptRoot\functions\arm\GetConfigHashTable.ps1
 . $PSScriptRoot\functions\arm\GetConfigObjectFromFile.ps1
 . $PSScriptRoot\functions\arm\GetKeyVaultSecretValue.ps1
@@ -52,10 +51,6 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\LoadBalancer\GetUrlAndIPForLoadBalancer.ps1
 . $PSScriptRoot\functions\LoadBalancer\MovePortsToLoadBalancer.ps1
 . $PSScriptRoot\functions\LoadBalancer\MovePortsToLoadBalancerForNamespace.ps1
-
-
-# Network
-. $PSScriptRoot\functions\Network\SetupNetworkSecurity.ps1
 
 # Stack
 . $PSScriptRoot\functions\Stack\InstallStackInAzure.ps1

@@ -33,12 +33,12 @@ function Get-KeyVaultName() {
     Write-Verbose 'Get-KeyVaultName: Starting'
     [hashtable]$Return = @{}
 
-    [string] $keyvaultname = "${resourceGroup}keyvault"
-    $keyvaultname = $keyvaultname -replace '[^a-zA-Z0-9]', ''
-    $keyvaultname = $keyvaultname.ToLower()
-    if ($keyvaultname.Length -gt 24) {
-        $keyvaultname = $keyvaultname.Substring(0, 24) # azure does not allow names longer than 24
-    }
+    [string] $keyvaultname = "${resourceGroup}kv"
+    # $keyvaultname = $keyvaultname -replace '[^a-zA-Z0-9]', ''
+    # $keyvaultname = $keyvaultname.ToLower()
+    # if ($keyvaultname.Length -gt 24) {
+    #     $keyvaultname = $keyvaultname.Substring(0, 24) # azure does not allow names longer than 24
+    # }
 
     $Return.Name = $keyvaultname
     Write-Verbose "Get-KeyVaultName: Done [$keyvaultname]"

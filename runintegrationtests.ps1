@@ -56,7 +56,7 @@ echo $globals | Out-String
 
 # Invoke-Pester "$here\functions\arm\DeployTemplate.Tests.ps1" -Tag 'Cluster' -Verbose
 
-Invoke-Pester "$here\functions\arm\DeployTemplate.Tests.ps1" -Tag 'AKS' -Verbose
+Invoke-Pester "$here\functions\InitKubernetes.Tests.ps1" -Tag 'AKS' -Verbose
 
 # Invoke-Pester "$here\functions\arm\DownloadCredentialsForAks.Tests.ps1" -Tag 'Integration' -Verbose
 
