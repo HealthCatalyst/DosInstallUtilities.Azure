@@ -68,7 +68,6 @@ function InstallProductInAzure() {
         -Verbose
 
     Write-Verbose 'InstallProductInAzure: Done'
-
 }
 
 Export-ModuleMember -Function 'InstallProductInAzure'

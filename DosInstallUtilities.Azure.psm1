@@ -45,6 +45,9 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\Storage\DeleteShare.ps1
 . $PSScriptRoot\functions\Storage\CreateAzureStorage.ps1
 
+# ResourceGroup
+. $PSScriptRoot\functions\ResourceGroup\GetResourceGroupFromSecret.ps1
+
 # LoadBalancer
 . $PSScriptRoot\functions\LoadBalancer\SetupLoadBalancer.ps1
 . $PSScriptRoot\functions\LoadBalancer\TestAzureLoadBalancer.ps1
