@@ -46,8 +46,8 @@ function InstallProductInAzure() {
     [string] $externalIP = $loadbalancerInfo.ExternalIP
     [string] $internalIP = $loadbalancerInfo.InternalIP
 
-    [string] $internalSubnetName = $(kubectl get svc -l "k8s-app-internal=traefik-ingress-lb" -n kube-system -o jsonpath="{.metadata.annotations.service\.beta\.kubernetes\.io/azure-load-balancer-internal-subnet}")
-    [string] $externalSubnetName = $(kubectl get svc -l "k8s-app-external=traefik-ingress-lb" -n kube-system -o jsonpath="{.metadata.annotations.service\.beta\.kubernetes\.io/azure-load-balancer-internal-subnet}")
+    [string] $internalSubnetName = $(kubectl get svc -l "$($globals.internalLoadBalancerLabel)" -n kube-system -o jsonpath="{.metadata.annotations.service\.beta\.kubernetes\.io/azure-load-balancer-internal-subnet}")
+    [string] $externalSubnetName = $(kubectl get svc -l "$($globals.externalLoadBalancerLabel)" -n kube-system -o jsonpath="{.metadata.annotations.service\.beta\.kubernetes\.io/azure-load-balancer-internal-subnet}")
 
     if (!$externalSubnetName) {$externalSubnetName = $internalSubnetName}
     if (!$internalSubnetName) {$internalSubnetName = $externalSubnetName}
