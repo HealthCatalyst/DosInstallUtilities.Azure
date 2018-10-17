@@ -51,8 +51,6 @@ function SetupLoadBalancer() {
 
     Write-Verbose 'SetupLoadBalancer: Starting'
 
-    $packageUrl = $globals.loadbalancerPackageUrl
-
     InstallLoadBalancerHelmPackage `
         -ExternalIP $ExternalIP `
         -ExternalSubnet $ExternalSubnet `
