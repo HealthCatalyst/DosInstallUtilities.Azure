@@ -19,7 +19,7 @@ Globals
 
 
 #>
-function Globals()
+function GlobalsDummy()
 {
     [CmdletBinding()]
     param
@@ -36,8 +36,12 @@ function Globals()
     resourceGroup = "fabrickubernetes4"
     loadbalancerPackageUrl = "https://raw.githubusercontent.com/HealthCatalyst/helm.loadbalancer/master/fabricloadbalancer-1.0.0.tgz"
     realtimePackageUrl = "https://raw.githubusercontent.com/HealthCatalyst/helm.realtime/master/fabricrealtime-1.0.0.tgz"
-    internalLoadBalancerLabel = "k8s-app-internal=traefik-ingress-lb"
-    externalLoadBalancerLabel = "k8s-app-external=traefik-ingress-lb"
+    externalLoadBalancerLabel = "k8s-app-external"
+    externalLoadBalancerLabelValue = "nginx"
+    internalLoadBalancerLabel = "k8s-app-internal"
+    internalLoadBalancerLabelValue = "nginx"
+    internalLoadBalancerLabelSelector = "k8s-app-internal=nginx"
+    externalLoadBalancerLabelSelector = "k8s-app-external=nginx"
 }
 
 Export-ModuleMember -Variable globals
