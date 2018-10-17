@@ -70,6 +70,8 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\KeyVault\CopyKeyVaultSecretsToKubernetes.ps1
 . $PSScriptRoot\functions\KeyVault\GetListOfSecretsInVault.ps1
 . $PSScriptRoot\functions\KeyVault\GetKeyInVault.ps1
+. $PSScriptRoot\functions\KeyVault\KeyVaultSecrets.ps1
+
 
 # VirtualMachine
 . $PSScriptRoot\functions\VirtualMachine\StartVMsInResourceGroup.ps1

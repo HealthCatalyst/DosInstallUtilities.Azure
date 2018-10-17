@@ -26,7 +26,22 @@ function SetupLoadBalancer() {
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]
-        $ExternalIp
+        $ExternalIP
+        ,
+        [Parameter(Mandatory = $true, HelpMessage="Set this if you want to put the external load balancer in a subnet")]
+        [AllowEmptyString()]
+        [string]
+        $ExternalSubnet
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $InternalIP
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $InternalSubnet
         ,
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -37,8 +52,12 @@ function SetupLoadBalancer() {
     Write-Verbose 'SetupLoadBalancer: Starting'
 
     $packageUrl = $globals.loadbalancerPackageUrl
+
     InstallLoadBalancerHelmPackage `
-        -externalIp "$externalip"
+        -ExternalIP $ExternalIP `
+        -ExternalSubnet $ExternalSubnet `
+        -InternalIP $InternalIP `
+        -InternalSubnet $InternalSubnet
 
     Write-Host "Checking load balancers"
     $loadBalancerIPResult = GetLoadBalancerIPs

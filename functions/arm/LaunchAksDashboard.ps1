@@ -44,11 +44,12 @@ function LaunchAksDashboard()
     [int] $port = $(Find-OpenPort -portArray $myPortArray).Port
     Write-Host "Starting Aks Dashboard on port $port"
 
-    $sb = [scriptblock]::Create("az aks browse --resource-group $resourceGroup --name $clusterName --listen-port $port")
-    $job = Start-Job -Name "KubDashboard" -ScriptBlock $sb -ErrorAction Stop
-    Wait-Job $job -Timeout 5;
-    Write-Host "job state: $($job.state)"
-    Receive-Job -Job $job 6>&1
+    az aks browse --resource-group $resourceGroup --name $clusterName --listen-port $port
+    # $sb = [scriptblock]::Create("az aks browse --resource-group $resourceGroup --name $clusterName --listen-port $port")
+    # $job = Start-Job -Name "KubDashboard" -ScriptBlock $sb -ErrorAction Stop
+    # Wait-Job $job -Timeout 5;
+    # Write-Host "job state: $($job.state)"
+    # Receive-Job -Job $job 6>&1
     # Start-AzureRmAksDashboard -ResourceGroupName $resourceGroup -Name "$clusterName"
 
     Write-Verbose 'LaunchAksDashboard: Done'
