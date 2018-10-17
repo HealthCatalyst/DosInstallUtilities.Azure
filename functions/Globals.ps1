@@ -34,7 +34,7 @@ function GlobalsDummy()
 
 [hashtable] $globals = @{
     resourceGroup = "fabrickubernetes4"
-    realtimePackageUrl = "https://raw.githubusercontent.com/HealthCatalyst/helm.realtime/master/fabricrealtime-1.0.0.tgz"
+    realtimePackageUrl = "https://raw.githubusercontent.com/HealthCatalyst/helm.realtime/master/fabricrealtime-1.1.0.tgz"
     externalLoadBalancerLabel = "k8s-app-external"
     externalLoadBalancerLabelValue = "nginx"
     internalLoadBalancerLabel = "k8s-app-internal"
