@@ -28,6 +28,7 @@ Describe "$filename Unit Tests" -Tags 'Unit' {
 }
 
 Describe "$filename Integration Tests" -Tags 'Integration' {
-    It "TestMethod" {
+    It "Can Init Kubernetes" {
+        InitKubernetes -subscriptionName "PlatformStaff-DevTest" -resourceGroup "hcut-aks-rg"
     }
 }

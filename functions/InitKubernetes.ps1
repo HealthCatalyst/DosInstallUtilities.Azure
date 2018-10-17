@@ -56,12 +56,15 @@ function InitKubernetes() {
     $InternalIP = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.internalLoadbalancerIP)
     $InternalSubnet = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.internalLoadbalancerSubnet)
 
-    if ($ExternalIP) {
+    if ([string]::IsNullOrWhiteSpace($ExternalIP)) {
         $clusterName = "Kluster-$resourceGroup"
         $resourceGroupOfAks = $(az aks show --resource-group $resourceGroup --name "$clusterName" --query nodeResourceGroup -o tsv)
+        Write-Verbose "ExternalIP not found in secrets so looking for public IP in resource group: $resourceGroupOfAks "
 
         $ExternalIP = $(az network public-ip list --resource-group "$resourceGroupOfAks" --query [0].ipAddress --output tsv)
     }
+
+    AssertStringIsNotNullOrEmpty $ExternalIP
 
     SetupLoadBalancer `
         -ExternalIP $ExternalIP `
