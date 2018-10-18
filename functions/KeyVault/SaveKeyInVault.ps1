@@ -46,7 +46,7 @@ function SaveKeyInVault() {
     $Secret = ConvertTo-SecureString -String "$value" -AsPlainText -Force
     Set-AzureKeyVaultSecret -VaultName "$keyvaultname" -Name "$key" -SecretValue $Secret
 
-    Write-Verbose 'SaveKeyInVault: Done'
+    Write-Verbose "SaveKeyInVault: Done [key=$key,value=$value]"
 }
 
 Export-ModuleMember -Function 'SaveKeyInVault'
