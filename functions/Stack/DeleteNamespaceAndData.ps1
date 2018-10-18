@@ -45,7 +45,7 @@ function DeleteNamespaceAndData() {
         DeleteOnPremStorage -namespace $namespace
     }
 
-    DeleteAllSecretsInNamespace -namespace $namespace
+    DeleteAllSecretsInNamespace -namespace $namespace -Verbose
 
     Write-Verbose 'DeleteNamespaceAndData: Done'
     return $Return
