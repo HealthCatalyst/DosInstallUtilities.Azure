@@ -32,21 +32,16 @@ function DeleteAzureStorage() {
     Write-Verbose 'DeleteAzureStorage: Starting'
     [hashtable]$Return = @{}
 
-    if ([string]::IsNullOrWhiteSpace($namespace)) {
-        Write-Error "no parameter passed to DeleteAzureStorage"
-        exit
-    }
-
     $resourceGroup = $(GetResourceGroup).ResourceGroup
 
-    Write-Information -MessageData "Using resource group: $resourceGroup"
+    Write-Host "Using resource group: $resourceGroup"
 
     $shareName = "$namespace"
     $storageAccountName = ReadSecretData -secretname azure-secret -valueName "azurestorageaccountname"
 
     $storageAccountConnectionString = az storage account show-connection-string -n $storageAccountName -g $resourceGroup -o tsv
 
-    Write-Information -MessageData "deleting the file share: $shareName"
+    Write-Host "deleting the file share: $shareName"
     DeleteShare -sharename $sharename -storageAccountConnectionString $storageAccountConnectionString
     Write-Verbose 'DeleteAzureStorage: Done'
     return $Return

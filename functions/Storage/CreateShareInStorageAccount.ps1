@@ -47,17 +47,17 @@ function CreateShareInStorageAccount() {
 
     $storageAccountConnectionString = az storage account show-connection-string -n $storageAccountName -g $resourceGroup -o tsv
 
-    # Write-Information -MessageData "Storage connection string: $storageAccountConnectionString"
+    # Write-Host "Storage connection string: $storageAccountConnectionString"
 
     if ($deleteExisting) {
         DeleteShare -sharename $sharename -storageAccountConnectionString $storageAccountConnectionString
     }
 
     if ($(az storage share exists -n $sharename --connection-string $storageAccountConnectionString --query "exists" -o tsv) -eq "false") {
-        Write-Information -MessageData "Creating the file share: $sharename"
+        Write-Host "Creating the file share: $sharename"
         az storage share create -n $sharename --connection-string $storageAccountConnectionString --quota $filesharesize
 
-        Write-Information -MessageData "Waiting for completion of create for the file share: $sharename"
+        Write-Host "Waiting for completion of create for the file share: $sharename"
         Do {
             $shareExists = $(az storage share exists -n $sharename --connection-string $storageAccountConnectionString --query "exists" -o tsv)
             Write-Host "."
@@ -66,11 +66,11 @@ function CreateShareInStorageAccount() {
         while ($shareExists -eq "false")
     }
     else {
-        Write-Information -MessageData "File share already exists: $sharename"
+        Write-Host "File share already exists: $sharename"
     }
-    return $Return
 
     Write-Verbose 'CreateShareInStorageAccount: Done'
+    return $Return
 }
 
 Export-ModuleMember -Function "CreateShareInStorageAccount"

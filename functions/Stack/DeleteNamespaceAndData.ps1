@@ -27,13 +27,17 @@ function DeleteNamespaceAndData() {
         [ValidateNotNullOrEmpty()]
         [string]
         $namespace
+        ,
+        [Parameter(Mandatory=$true)]
+        [bool]
+        $isAzure
     )
 
     Write-Verbose 'DeleteNamespaceAndData: Starting'
     [hashtable]$Return = @{}
 
     CleanOutNamespace -namespace $namespace
-    $isAzure=$true
+
     if ($isAzure) {
         DeleteAzureStorage -namespace $namespace
     }

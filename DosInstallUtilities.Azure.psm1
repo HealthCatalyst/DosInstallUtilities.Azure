@@ -44,6 +44,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\Storage\CreateShareInStorageAccount.ps1
 . $PSScriptRoot\functions\Storage\DeleteShare.ps1
 . $PSScriptRoot\functions\Storage\CreateAzureStorage.ps1
+. $PSScriptRoot\functions\Storage\DeleteAzureStorage.ps1
 
 # ResourceGroup
 . $PSScriptRoot\functions\ResourceGroup\GetResourceGroupFromSecret.ps1
@@ -57,7 +58,6 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Stack
 . $PSScriptRoot\functions\Stack\InstallStackInAzure.ps1
-. $PSScriptRoot\functions\Stack\CreateSecretsForStack.ps1
 . $PSScriptRoot\functions\Stack\InstallProductInAzure.ps1
 . $PSScriptRoot\functions\Stack\DeleteNamespaceAndData.ps1
 . $PSScriptRoot\functions\Stack\RunRealtimeTester.ps1
