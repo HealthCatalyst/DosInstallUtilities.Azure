@@ -33,8 +33,8 @@ function SetupLoadBalancer() {
         [string]
         $ExternalSubnet
         ,
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory = $true, HelpMessage="If not set, we will use a random IP from the subnet")]
+        [AllowEmptyString()]
         [string]
         $InternalIP
         ,

@@ -1,16 +1,16 @@
 <#
   .SYNOPSIS
   GetKeyVaultSecretValue
-  
+
   .DESCRIPTION
   GetKeyVaultSecretValue
-  
+
   .INPUTS
   GetKeyVaultSecretValue - The name of GetKeyVaultSecretValue
 
   .OUTPUTS
   None
-  
+
   .EXAMPLE
   GetKeyVaultSecretValue
 
@@ -25,21 +25,20 @@ function GetKeyVaultSecretValue()
   param
   (
     [Parameter(Mandatory = $true)]
-    [string] 
+    [string]
     $keyVaultName
     ,
-    [Parameter(Mandatory = $true)] 
-    [string] 
+    [Parameter(Mandatory = $true)]
+    [string]
     $keyVaultSecretName
   )
 
-  Write-Verbose 'GetKeyVaultSecretValue: Starting'
+  Write-Verbose "GetKeyVaultSecretValue: Starting ($keyVaultSecretName)"
 
   $secret = Get-AzureKeyVaultSecret -VaultName $keyVaultName -Name $keyVaultSecretName
-  return $secret.SecretValueText #.Replace('"', '\"')
-  
-  Write-Verbose 'GetKeyVaultSecretValue: Done'
 
+  Write-Verbose "'GetKeyVaultSecretValue: Done ($keyVaultSecretName)"
+  return $secret.SecretValueText #.Replace('"', '\"')
 }
 
 Export-ModuleMember -Function "GetKeyVaultSecretValue"

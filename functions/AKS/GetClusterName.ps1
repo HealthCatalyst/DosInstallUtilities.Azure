@@ -32,11 +32,11 @@ function GetClusterName()
 
     [hashtable] $result = @{}
 
-    Write-Verbose 'GetClusterName: Starting'
+    Write-Verbose "GetClusterName: Starting ($resourceGroup)"
 
     $result.ClusterName = "Kluster-$resourceGroup"
 
-    Write-Verbose 'GetClusterName: Done'
+    Write-Verbose "GetClusterName: Done $($result.ClusterName)"
 
     return $result
 }
