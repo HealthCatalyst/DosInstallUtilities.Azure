@@ -38,7 +38,7 @@ function CreateShare() {
         $deleteExisting
     )
 
-    Write-Verbose 'CreateShare: Starting'
+    Write-Verbose "CreateShare: Starting ($sharename)"
 
     [hashtable]$Return = @{}
 
@@ -49,10 +49,5 @@ function CreateShare() {
     Write-Verbose 'CreateShare: Done'
     return $Return
 }
-
-function CreateShareInStorageAccount() {
-
-}
-
 
 Export-ModuleMember -Function "CreateShare"

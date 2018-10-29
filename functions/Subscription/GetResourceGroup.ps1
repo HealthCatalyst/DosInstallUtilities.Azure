@@ -31,7 +31,7 @@ function GetResourceGroup()
   [hashtable]$Return = @{}
   $Return.ResourceGroup = ReadSecretData -secretname azure-secret -valueName "resourcegroup"
 
-  Write-Verbose 'GetResourceGroup: Done'
+  Write-Verbose "GetResourceGroup: Done ($($Return.ResourceGroup)"
   return $Return
 }
 

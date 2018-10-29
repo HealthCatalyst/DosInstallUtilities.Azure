@@ -33,7 +33,6 @@ function GetResourceGroupFromSecret()
     # stop whenever there is an error
     $ErrorActionPreference = "Stop"
 
-
     [hashtable] $result = @{}
 
     [string] $result.Value = ReadSecretData -secretname "azure-secret" -valueName "resourcegroup" -namespace "default"
