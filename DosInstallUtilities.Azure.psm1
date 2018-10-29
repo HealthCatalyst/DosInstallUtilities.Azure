@@ -3,7 +3,7 @@ Import-Module AzureRM
 Import-Module AzureRM.Storage
 Import-Module AzureRM.Profile
 Import-Module AzureRM.Resources
-Import-Module AzureRM.Aks
+# Import-Module AzureRM.Aks
 
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 # Import-Module "$here\..\dos-install-common-kube\dos-install-common-kube.psm1"
