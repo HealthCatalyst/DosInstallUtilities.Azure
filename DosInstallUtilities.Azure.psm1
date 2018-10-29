@@ -27,7 +27,6 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\AKS\LoginAsServiceAccount.ps1
 . $PSScriptRoot\functions\AKS\GetServicePrincipalFromKeyVault.ps1
 . $PSScriptRoot\functions\AKS\InstallKubectl.ps1
-. $PSScriptRoot\functions\AKS\InstallHelmClient.ps1
 
 . $PSScriptRoot\functions\Uninstall-AllModules.ps1
 
