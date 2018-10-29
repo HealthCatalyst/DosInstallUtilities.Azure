@@ -40,6 +40,10 @@ function InitKubernetes() {
 
     SetCurrentAzureSubscription -subscriptionName $subscriptionName
 
+    [string] $clusterName = $(GetClusterName -resourceGroup $resourceGroup).ClusterName
+
+    GetClusterCredentials -resourceGroup $resourceGroup -clusterName $clusterName
+
     # SetStorageAccountNameIntoSecret -resourceGroup $resourceGroup -customerid $customerid
 
     # kubectl get "deployments,pods,services,ingress,secrets" --namespace="default" -o wide
@@ -57,7 +61,6 @@ function InitKubernetes() {
     $InternalSubnet = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.internalLoadbalancerSubnet)
 
     if ([string]::IsNullOrWhiteSpace($ExternalIP)) {
-        $clusterName = "Kluster-$resourceGroup"
         $resourceGroupOfAks = $(az aks show --resource-group $resourceGroup --name "$clusterName" --query nodeResourceGroup -o tsv)
         Write-Verbose "ExternalIP not found in secrets so looking for public IP in resource group: $resourceGroupOfAks "
 

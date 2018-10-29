@@ -44,6 +44,9 @@ function KeyVaultSecretsDummy()
     dnshostname = "dnshostname"
     storageName = "storageName"
     storageKey = "storageKey"
+    servicePrincipalClientId = "servicePrincipalClientId"
+    servicePrincipalClientSecret = "servicePrincipalClientSecret"
+    tenantId = "tenantId"
 }
 
 Export-ModuleMember -Variable KeyVaultSecrets

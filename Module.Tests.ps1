@@ -6,11 +6,6 @@ Get-Module "$module" | Remove-Module -Force
 
 Import-Module "$here\$module.psm1" -Force
 
-
-# $Credential = Get-Credential -UserName "$env:USERNAME@$env:USERDNSDOMAIN" -Message "login please"
-# Connect-AzureRmAccount -Credential $Credential
-LoginToAzure -Verbose
-
 Describe "$module Tests" {
     It "has the root module $module.psm1" {
         "$here\$module.psm1" | Should Exist
@@ -67,11 +62,11 @@ Describe "$module Tests" {
                     Test-Script -script $psFile
                 }
             }
-            Context "$function has tests" {
-                It "$function.Tests.ps1 should exist" {
-                    "$functionFolder\$function.Tests.ps1" | Should Exist
-                }
-            }
+            # Context "$function has tests" {
+            #     It "$function.Tests.ps1 should exist" {
+            #         "$functionFolder\$function.Tests.ps1" | Should Exist
+            #     }
+            # }
         }
     }
 }

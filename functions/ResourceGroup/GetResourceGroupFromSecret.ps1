@@ -29,9 +29,18 @@ function GetResourceGroupFromSecret()
 
     Write-Verbose 'GetResourceGroupFromSecret: Starting'
 
-    ReadSecretData -secretname "azure-secret" -valueName "resourcegroup" -namespace "default"
+    Set-StrictMode -Version latest
+    # stop whenever there is an error
+    $ErrorActionPreference = "Stop"
 
-    Write-Verbose 'GetResourceGroupFromSecret: Done'
+
+    [hashtable] $result = @{}
+
+    [string] $result.Value = ReadSecretData -secretname "azure-secret" -valueName "resourcegroup" -namespace "default"
+
+    Write-Verbose "GetResourceGroupFromSecret: Done ($($result.Value)"
+
+    return $result
 }
 
 Export-ModuleMember -Function 'GetResourceGroupFromSecret'

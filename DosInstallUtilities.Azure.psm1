@@ -19,6 +19,14 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\LoginToAzure.ps1
 . $PSScriptRoot\functions\InitKubernetes.ps1
 
+# AKS
+. $PSScriptRoot\functions\AKS\GetClusterCredentials.ps1
+. $PSScriptRoot\functions\AKS\GetClusterAdminCredentials.ps1
+. $PSScriptRoot\functions\AKS\GetClusterName.ps1
+. $PSScriptRoot\functions\AKS\AddPermissionForUser.ps1
+. $PSScriptRoot\functions\AKS\LoginAsServiceAccount.ps1
+. $PSScriptRoot\functions\AKS\GetServicePrincipalFromKeyVault.ps1
+
 . $PSScriptRoot\functions\Uninstall-AllModules.ps1
 
 # arm
