@@ -1,16 +1,16 @@
 <#
   .SYNOPSIS
   SetCurrentAzureSubscription
-  
+
   .DESCRIPTION
   SetCurrentAzureSubscription
-  
+
   .INPUTS
   SetCurrentAzureSubscription - The name of SetCurrentAzureSubscription
 
   .OUTPUTS
   None
-  
+
   .EXAMPLE
   SetCurrentAzureSubscription
 
@@ -25,14 +25,18 @@ function SetCurrentAzureSubscription() {
     (
         [Parameter(Mandatory = $true)]
         [ValidateNotNull()]
-        [string] 
+        [string]
         $subscriptionName
     )
 
-    Write-Verbose 'SetCurrentAzureSubscription: Starting'
+    Write-Verbose "SetCurrentAzureSubscription: Starting $subscriptionName"
 
-    #Create an hashtable variable 
-    [hashtable]$Return = @{} 
+    Set-StrictMode -Version latest
+    # stop whenever there is an error
+    $ErrorActionPreference = "Stop"
+
+    #Create an hashtable variable
+    [hashtable]$Return = @{}
 
     [string] $currentsubscriptionName = $(Get-AzureRmContext).Subscription.Name
     AssertStringIsNotNullOrEmpty $currentsubscriptionName
@@ -40,10 +44,9 @@ function SetCurrentAzureSubscription() {
     [string] $currentsubscriptionId = $(Get-AzureRmContext).Subscription.Id
     AssertStringIsNotNullOrEmpty $currentsubscriptionId
 
-    Write-Verbose "Current SubscriptionId: ${currentsubscriptionId}, newSubcriptionID: ${subscriptionId}"
+    Write-Verbose "Current SubscriptionId: ${currentsubscriptionId}, newSubcriptionID: ${currentsubscriptionId}"
 
-    # Get-AzureRmSubscription
-
+    Write-Verbose "Checking Powershell Azure"
     if ($subscriptionName -eq $currentsubscriptionName -or ($subscriptionName -eq $currentsubscriptionId)) {
         # nothing to do
         Write-Verbose "Subscription is already set properly so no need to anything"
@@ -51,15 +54,22 @@ function SetCurrentAzureSubscription() {
     else {
         Write-Verbose "Setting subscription to $subscriptionName"
         Select-AzureRmSubscription -SubscriptionName $subscriptionName
-        $currentsubscriptionName = $(Get-AzureRmContext).Subscription.Name
-        $currentsubscriptionId = $(Get-AzureRmContext).Subscription.Id            
     }
 
+    Write-Verbose "Checking az cli"
+    $currentSubscription=$(GetCurrentAzureSubscription)
+    if ($subscriptionName -eq $($currentsubscription.AKS_SUBSCRIPTION_NAME) -or ($subscriptionName -eq $($currentsubscription.AKS_SUBSCRIPTION_ID))) {
+        Write-Verbose "Subscription is already set properly so no need to anything"
+    }
+    else {
+        Write-Verbose "Setting subscription to $subscriptionName"
+        az account set --subscription $subscriptionName
+    }
     # # az account get-access-token --subscription $currentsubscriptionId
 
     Write-Verbose 'SetCurrentAzureSubscription: Done'
 
-    return $Return  
+    return $Return
 }
 
 Export-ModuleMember -Function "SetCurrentAzureSubscription"

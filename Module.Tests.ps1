@@ -1,3 +1,4 @@
+
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 $functionFolder = "$here\functions"
 $module = "DosInstallUtilities.Azure"

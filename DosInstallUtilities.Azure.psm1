@@ -45,6 +45,7 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\Subscription\SetCurrentAzureSubscription.ps1
 . $PSScriptRoot\functions\Subscription\GetResourceGroup.ps1
 . $PSScriptRoot\functions\Subscription\GetCurrentAzureSubscription.ps1
+. $PSScriptRoot\functions\Subscription\ChooseFromSubscriptionList.ps1
 
 # Storage
 . $PSScriptRoot\functions\Storage\GetStorageAccountName.ps1

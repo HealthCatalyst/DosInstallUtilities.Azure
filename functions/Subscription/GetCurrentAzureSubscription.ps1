@@ -22,6 +22,7 @@ GetCurrentAzureSubscription
 function GetCurrentAzureSubscription()
 {
     [CmdletBinding()]
+    [OutputType([hashtable])]
     param
     (
     )
