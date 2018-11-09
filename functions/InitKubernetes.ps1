@@ -36,15 +36,19 @@ function InitKubernetes() {
 
     Write-Verbose 'InitKubernetes: Starting'
 
-    LoginToAzure
+    Set-StrictMode -Version latest
+    # stop whenever there is an error
+    $ErrorActionPreference = "Stop"
 
-    SetCurrentAzureSubscription -subscriptionName $subscriptionName
+    # LoginToAzure
+
+    # SetCurrentAzureSubscription -subscriptionName $subscriptionName
 
     [string] $clusterName = $(GetClusterName -resourceGroup $resourceGroup).ClusterName
 
     GetClusterCredentials -resourceGroup $resourceGroup -clusterName $clusterName
 
-    # SetStorageAccountNameIntoSecret -resourceGroup $resourceGroup -customerid $customerid
+    AskForPasswordAnyCharacters -secretname "smtprelaypassword" -prompt "Please enter SMTP relay password" -namespace "default"
 
     # kubectl get "deployments,pods,services,ingress,secrets" --namespace="default" -o wide
     # kubectl get "deployments,pods,services,ingress,secrets" --namespace=kube-system -o wide
@@ -55,12 +59,21 @@ function InitKubernetes() {
     AssertStringIsNotNullOrEmpty $keyVaultName
 
     $customerid = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.internalLoadbalancerSubnet)
+    SetStorageAccountNameIntoSecret -resourceGroup $resourceGroup -customerid $customerid
+
     $ExternalIp = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.externalLoadbalancerIP)
     $ExternalSubnet = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.externalLoadbalancerSubnet)
+    if ($ExternalIp -eq "auto") {
+        $ExternalIp = ""
+    }
+
     $InternalIP = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.internalLoadbalancerIP)
     $InternalSubnet = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.internalLoadbalancerSubnet)
+    if ($InternalIp -eq "auto") {
+        $InternalIp = ""
+    }
 
-    if ([string]::IsNullOrWhiteSpace($ExternalIP)) {
+    if ([string]::IsNullOrWhiteSpace($ExternalIP) -and (![string]::IsNullOrWhiteSpace($ExternalSubnet))) {
         $resourceGroupOfAks = $(az aks show --resource-group $resourceGroup --name "$clusterName" --query nodeResourceGroup -o tsv)
         Write-Verbose "ExternalIP not found in secrets so looking for public IP in resource group: $resourceGroupOfAks "
 
