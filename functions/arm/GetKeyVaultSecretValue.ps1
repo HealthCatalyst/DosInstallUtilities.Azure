@@ -37,7 +37,7 @@ function GetKeyVaultSecretValue()
 
   $secret = Get-AzureKeyVaultSecret -VaultName $keyVaultName -Name $keyVaultSecretName
 
-  Write-Verbose "'GetKeyVaultSecretValue: Done ($keyVaultSecretName)"
+  Write-Verbose "GetKeyVaultSecretValue: Done: $($secret.SecretValueText)"
   return $secret.SecretValueText #.Replace('"', '\"')
 }
 

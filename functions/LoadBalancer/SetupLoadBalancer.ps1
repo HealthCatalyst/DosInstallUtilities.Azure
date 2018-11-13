@@ -24,7 +24,7 @@ function SetupLoadBalancer() {
     param
     (
         [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
+        [AllowEmptyString()]
         [string]
         $ExternalIP
         ,

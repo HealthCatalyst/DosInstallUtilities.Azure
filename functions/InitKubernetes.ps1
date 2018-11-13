@@ -73,21 +73,21 @@ function InitKubernetes() {
         $InternalIp = ""
     }
 
-    if ([string]::IsNullOrWhiteSpace($ExternalIP) -and (![string]::IsNullOrWhiteSpace($ExternalSubnet))) {
+    if ([string]::IsNullOrWhiteSpace($ExternalIP) -and ([string]::IsNullOrWhiteSpace($ExternalSubnet))) {
         $resourceGroupOfAks = $(az aks show --resource-group $resourceGroup --name "$clusterName" --query nodeResourceGroup -o tsv)
         Write-Verbose "ExternalIP not found in secrets so looking for public IP in resource group: $resourceGroupOfAks "
 
         $ExternalIP = $(az network public-ip list --resource-group "$resourceGroupOfAks" --query [0].ipAddress --output tsv)
+        AssertStringIsNotNullOrEmpty $ExternalIP
     }
-
-    AssertStringIsNotNullOrEmpty $ExternalIP
 
     SetupLoadBalancer `
         -ExternalIP $ExternalIP `
         -ExternalSubnet $ExternalSubnet `
         -InternalIP $InternalIP `
         -InternalSubnet $InternalSubnet `
-        -customerid $customerid
+        -customerid $customerid `
+        -Verbose
 
     Write-Verbose 'InitKubernetes: Done'
 }
