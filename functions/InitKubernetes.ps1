@@ -61,6 +61,8 @@ function InitKubernetes() {
     $customerid = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.internalLoadbalancerSubnet)
     SetStorageAccountNameIntoSecret -resourceGroup $resourceGroup -customerid $customerid
 
+    $dnshostName = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.dnshostname)
+
     $ExternalIp = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.externalLoadbalancerIP)
     $ExternalSubnet = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.externalLoadbalancerSubnet)
     if ($ExternalIp -eq "auto") {
@@ -87,6 +89,7 @@ function InitKubernetes() {
         -InternalIP $InternalIP `
         -InternalSubnet $InternalSubnet `
         -customerid $customerid `
+        -dnshostName $dnshostName `
         -Verbose
 
     Write-Verbose 'InitKubernetes: Done'

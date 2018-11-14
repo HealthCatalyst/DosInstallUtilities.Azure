@@ -47,6 +47,11 @@ function SetupLoadBalancer() {
         [ValidateNotNullOrEmpty()]
         [string]
         $customerid
+        ,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $dnshostName
     )
 
     Write-Verbose 'SetupLoadBalancer: Starting'
@@ -65,6 +70,12 @@ function SetupLoadBalancer() {
     Write-Host "IP for public loadbalancer: [$externalIp], private load balancer: [$internalIp]"
 
     SaveSecretValue -secretname "dnshostname" -valueName "value" -value $customerid -namespace "default"
+
+    [string] $secret = "certpassword"
+    [string] $namespace = "default"
+    GenerateSecretPassword -secretname "$secret" -namespace "$namespace"
+    [string] $certPassword = $(ReadSecretPassword -secretname "$secret" -namespace "$namespace")
+    GenerateCertificates -CertHostName "$dnshostName" -CertPassword $certPassword
 
     Write-Verbose 'SetupLoadBalancer: Done'
 }
