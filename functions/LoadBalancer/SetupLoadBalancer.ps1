@@ -23,7 +23,7 @@ function SetupLoadBalancer() {
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $true, HelpMessage="Set this if you want to use a specific public IP. Does not work for private IPs.")]
         [AllowEmptyString()]
         [string]
         $ExternalIP

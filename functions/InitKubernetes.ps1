@@ -46,7 +46,7 @@ function InitKubernetes() {
 
     [string] $clusterName = $(GetClusterName -resourceGroup $resourceGroup).ClusterName
 
-    GetClusterCredentials -resourceGroup $resourceGroup -clusterName $clusterName
+    # GetClusterCredentials -resourceGroup $resourceGroup -clusterName $clusterName
 
     AskForPasswordAnyCharacters -secretname "smtprelaypassword" -prompt "Please enter SMTP relay password" -namespace "default"
 
