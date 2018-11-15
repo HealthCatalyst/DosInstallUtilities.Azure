@@ -27,7 +27,6 @@ Import-Module "$here\..\$module\$module.psm1" -Force
 # Invoke-Pester "$here\functions\Storage\SetStorageAccountNameIntoSecret.Tests.ps1" -Tag 'Unit'
 # Invoke-Pester "$here\functions\Storage\SetStorageAccountNameIntoSecret.Tests.ps1" -Tag 'Integration'
 # Invoke-Pester "$here\functions\Storage\CreateAzureStorage.Tests.ps1" -Tag 'Integration' -Verbose
-# Invoke-Pester "$here\functions\Storage\InstallStackInKubernetes.Tests.ps1" -Tag 'Integration' -Verbose
 
 # # Subscription
 # Invoke-Pester "$here\functions\Subscription\SetCurrentAzureSubscription.Tests.ps1" -Tag 'Unit'
@@ -35,7 +34,6 @@ Import-Module "$here\..\$module\$module.psm1" -Force
 
 # Network
  # Invoke-Pester "$here\functions\Network\SetupNetworkSecurity.Tests.ps1" -Tag 'Integration' -Verbose
-
 
 # Load Balancer
 # Invoke-Pester "$here\functions\LoadBalancer\SetupLoadBalancer.Tests.ps1" -Tag 'Unit'

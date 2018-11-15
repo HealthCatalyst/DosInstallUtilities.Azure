@@ -67,8 +67,6 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 . $PSScriptRoot\functions\LoadBalancer\MovePortsToLoadBalancerForNamespace.ps1
 
 # Stack
-. $PSScriptRoot\functions\Stack\InstallStackInAzure.ps1
-. $PSScriptRoot\functions\Stack\InstallProductInAzure.ps1
 . $PSScriptRoot\functions\Stack\DeleteNamespaceAndData.ps1
 . $PSScriptRoot\functions\Stack\RunRealtimeTester.ps1
 

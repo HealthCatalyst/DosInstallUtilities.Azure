@@ -29,7 +29,6 @@ echo $globals | Out-String
 # Invoke-Pester "$here\functions\Storage\SetStorageAccountNameIntoSecret.Tests.ps1" -Tag 'Unit'
 # Invoke-Pester "$here\functions\Storage\SetStorageAccountNameIntoSecret.Tests.ps1" -Tag 'Integration'
 # Invoke-Pester "$here\functions\Storage\CreateAzureStorage.Tests.ps1" -Tag 'Integration' -Verbose
-# Invoke-Pester "$here\functions\Storage\InstallStackInKubernetes.Tests.ps1" -Tag 'Integration' -Verbose
 
 # # Subscription
 # Invoke-Pester "$here\functions\Subscription\SetCurrentAzureSubscription.Tests.ps1" -Tag 'Unit'
