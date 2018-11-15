@@ -48,8 +48,6 @@ function InitKubernetes() {
 
     # GetClusterCredentials -resourceGroup $resourceGroup -clusterName $clusterName
 
-    AskForPasswordAnyCharacters -secretname "smtprelaypassword" -prompt "Please enter SMTP relay password" -namespace "default"
-
     # kubectl get "deployments,pods,services,ingress,secrets" --namespace="default" -o wide
     # kubectl get "deployments,pods,services,ingress,secrets" --namespace=kube-system -o wide
 
@@ -60,6 +58,21 @@ function InitKubernetes() {
 
     $customerid = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.internalLoadbalancerSubnet)
     SetStorageAccountNameIntoSecret -resourceGroup $resourceGroup -customerid $customerid
+
+    [string] $smtpRelayKey = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.smtpRelayKey)
+    if ([string]::IsNullOrEmpty($smtpRelayKey)) {
+        AskForPasswordAnyCharacters -secretname "smtprelaypassword" -prompt "Please enter SMTP relay password" -namespace "default"
+    }
+    else {
+        SaveSecretPassword -secretname "smtprelaypassword" -namespace "default" -value $smtpRelayKey
+    }
+
+    [string] $notificationSlackUrl = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.notificationSlackUrl)
+    if ([string]::IsNullOrEmpty($notificationSlackUrl)) {
+    }
+    else {
+        SaveSecretPassword -secretname "notificationSlackUrl" -namespace "default" -value $notificationSlackUrl
+    }
 
     $dnshostName = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.dnshostname)
 

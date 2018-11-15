@@ -47,6 +47,8 @@ function KeyVaultSecretsDummy()
     servicePrincipalClientId = "servicePrincipalClientId"
     servicePrincipalClientSecret = "servicePrincipalClientSecret"
     tenantId = "tenantId"
+    smtpRelayKey = "smtpRelayKey"
+    notificationSlackUrl = "notificationSlackUrl"
 }
 
 Export-ModuleMember -Variable KeyVaultSecrets
