@@ -69,7 +69,7 @@ function SetupLoadBalancer() {
 
     Write-Host "IP for public loadbalancer: [$externalIp], private load balancer: [$internalIp]"
 
-    SaveSecretValue -secretname "dnshostname" -valueName "value" -value $customerid -namespace "default"
+    SaveSecretValue -secretname "dnshostname" -valueName "value" -value $dnshostName -namespace "default"
 
     [string] $secret = "certpassword"
     [string] $namespace = "default"

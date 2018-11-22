@@ -67,12 +67,12 @@ function InitKubernetes() {
         SaveSecretPassword -secretname "smtprelaypassword" -namespace "default" -value $smtpRelayKey
     }
 
-    [string] $notificationSlackUrl = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.notificationSlackUrl)
-    if ([string]::IsNullOrEmpty($notificationSlackUrl)) {
-    }
-    else {
-        SaveSecretPassword -secretname "notificationSlackUrl" -namespace "default" -value $notificationSlackUrl
-    }
+    # [string] $notificationSlackUrl = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.notificationSlackUrl)
+    # if ([string]::IsNullOrEmpty($notificationSlackUrl)) {
+    # }
+    # else {
+    #     SaveSecretPassword -secretname "notificationSlackUrl" -namespace "default" -value $notificationSlackUrl
+    # }
 
     $dnshostName = $(GetKeyVaultSecretValue -keyVaultName $keyVaultName -keyVaultSecretName $KeyVaultSecrets.dnshostname)
 
