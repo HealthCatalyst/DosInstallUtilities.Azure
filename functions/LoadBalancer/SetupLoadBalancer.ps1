@@ -56,6 +56,14 @@ function SetupLoadBalancer() {
 
     Write-Verbose 'SetupLoadBalancer: Starting'
 
+    SaveSecretValue -secretname "dnshostname" -valueName "value" -value $dnshostName -namespace "default"
+
+    [string] $secret = "certpassword"
+    [string] $namespace = "default"
+    GenerateSecretPassword -secretname "$secret" -namespace "$namespace"
+    [string] $certPassword = $(ReadSecretPassword -secretname "$secret" -namespace "$namespace")
+    GenerateCertificates -CertHostName "$dnshostName" -CertPassword $certPassword
+
     InstallLoadBalancerHelmPackage `
         -ExternalIP $ExternalIP `
         -ExternalSubnet $ExternalSubnet `
@@ -68,14 +76,6 @@ function SetupLoadBalancer() {
     $internalIp = $loadBalancerIPResult.InternalIP
 
     Write-Host "IP for public loadbalancer: [$externalIp], private load balancer: [$internalIp]"
-
-    SaveSecretValue -secretname "dnshostname" -valueName "value" -value $dnshostName -namespace "default"
-
-    [string] $secret = "certpassword"
-    [string] $namespace = "default"
-    GenerateSecretPassword -secretname "$secret" -namespace "$namespace"
-    [string] $certPassword = $(ReadSecretPassword -secretname "$secret" -namespace "$namespace")
-    GenerateCertificates -CertHostName "$dnshostName" -CertPassword $certPassword
 
     Write-Verbose 'SetupLoadBalancer: Done'
 }
