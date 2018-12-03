@@ -105,6 +105,8 @@ function InitKubernetes() {
         -dnshostName $dnshostName `
         -Verbose
 
+    InstallGrafana
+
     Write-Verbose 'InitKubernetes: Done'
 }
 
