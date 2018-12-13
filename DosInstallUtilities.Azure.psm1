@@ -29,6 +29,9 @@ $here = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 . $PSScriptRoot\functions\Uninstall-AllModules.ps1
 
+# Active Directory
+. $PSScriptRoot\functions\ActiveDirectory\CheckUserIsKubernetesAdministrator.ps1
+
 # arm
 . $PSScriptRoot\functions\arm\AssignPermissionsToServicePrincipal.ps1
 . $PSScriptRoot\functions\arm\BuildSubnetId.ps1

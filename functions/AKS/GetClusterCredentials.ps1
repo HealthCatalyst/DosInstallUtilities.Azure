@@ -44,6 +44,7 @@ function GetClusterCredentials() {
     [bool] $result = $?
     if (!$result) {
         Write-Error "Could not connect to kubernetes cluster $clusterName in resource  group $resourceGroup"
+        throw "Could not connect"
     }
 
     Write-Verbose 'GetClusterCredentials: Done'
